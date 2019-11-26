@@ -60,7 +60,7 @@ class Results extends React.Component {
                                             <b>Link: </b>
                                         </td>
                                         <td>
-                                            <a href="#" onClick={() => this.props.showTranscript(doc.link)}>Episode Transcript</a>
+                                            <a href={"#" + doc.line} onClick={() => this.props.showTranscript(doc.link)}>Episode Transcript</a>
                                         </td>
                                     </tr>
                                     </tbody>
