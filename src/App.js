@@ -1,26 +1,51 @@
 import React from 'react';
-import logo from './logo.svg';
+import bronies from './bronies.jpg';
 import './App.css';
+import QueryForm from "./QueryForm";
+import Results from "./Results";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {view: 'form', data: null, url: 'http://127.0.0.1:5000'};
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(event, values) {
+        alert('Model: ' + values.model + '\nQuery: ' + values.query + '\nSeason: ' + values.season + '\nEpisode: ' +
+            values.episode + '\nCharacter: ' + values.character);
+        // send as params, only one ? and then & between each one. so /get_results?val1=val1&val2=val2
+        event.preventDefault();
+        const data = {
+            model: values.model,
+            query: values.query,
+            season: values.season,
+            episode: values.episode,
+            character: values.character
+        };
+
+        this.setState({
+            view: 'results',
+            data: data
+        });
+    }
+
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <img src={bronies} className="App-logo" alt="bronies logo" width="200px" height="160px"/>
+                    <p>
+                        My Little Bronies Search Engine
+                    </p>
+                </header>
+                <QueryForm handleSubmit={this.handleSubmit} url={this.state.url}/>
+                {/*{this.state.view === "form" && <QueryForm handleSubmit={this.handleSubmit}/>}*/}
+                <br/>
+                {this.state.view === "results" && <Results data={this.state.data} url={this.state.url}/>}
+            </div>
+        );
+    }
 }
 
 export default App;
