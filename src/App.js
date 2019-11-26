@@ -7,8 +7,9 @@ import Results from "./Results";
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {view: 'form', data: null, url: 'http://127.0.0.1:5000'};
+        this.state = {view: 'form', data: null, url: 'http://127.0.0.1:5000', transcript: null};
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showTranscript = this.showTranscript.bind(this);
     }
 
     handleSubmit(event, values) {
@@ -27,6 +28,13 @@ class App extends React.Component {
         });
     }
 
+    showTranscript(transcript) {
+        this.setState({
+            view: 'transcript',
+            transcript: transcript
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -37,9 +45,11 @@ class App extends React.Component {
                     </p>
                 </header>
                 <QueryForm handleSubmit={this.handleSubmit} url={this.state.url}/>
-                {/*{this.state.view === "form" && <QueryForm handleSubmit={this.handleSubmit}/>}*/}
                 <br/>
-                {this.state.view === "results" && <Results data={this.state.data} url={this.state.url}/>}
+                {this.state.view === "results" && <Results data={this.state.data} url={this.state.url} showTranscript={this.showTranscript}/>}
+                {this.state.view === "transcript" && (
+                    <div dangerouslySetInnerHTML={{__html: this.state.transcript}} />
+                )}
             </div>
         );
     }
