@@ -18,7 +18,6 @@ class QueryForm extends React.Component {
         fetch(`${this.props.url}/all_seasons`).then(results => {
             return results.json();
         }).then(data => {
-            debugger;
             let seasons = data.seasons.map( (s, k) => {
                 return (
                     <option value={s} key={k}>Season {s}</option>

@@ -22,7 +22,7 @@ class Results extends React.Component {
                                 </tr>
                                 <tr>
                                     <td><b>Episode:</b></td>
-                                    <td>{doc.episode} (#{doc.episodeNumber})</td>
+                                    <td>{doc.episode} (Episode #{doc.episodeNumber})</td>
                                 </tr>
                                 {/*<tr>
                                     <td><b>Character:</b></td>

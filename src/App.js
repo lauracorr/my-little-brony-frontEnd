@@ -12,9 +12,6 @@ class App extends React.Component {
     }
 
     handleSubmit(event, values) {
-        alert('Model: ' + values.model + '\nQuery: ' + values.query + '\nSeason: ' + values.season + '\nEpisode: ' +
-            values.episode + '\nCharacter: ' + values.character);
-        // send as params, only one ? and then & between each one. so /get_results?val1=val1&val2=val2
         event.preventDefault();
         const data = {
             model: values.model,
