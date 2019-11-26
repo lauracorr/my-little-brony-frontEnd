@@ -8,19 +8,29 @@ class Results extends React.Component {
             top_ten: [],
             url: '',
             transcript: null,
-            displayTranscript: false};
+            displayTranscript: false
+        };
+
+        this.fetchData = this.fetchData.bind(this);
     }
 
-
-
     componentDidMount() {
+        this.fetchData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.data !== prevProps.data) {
+            this.fetchData();
+        }
+    }
+
+    fetchData() {
         fetch(`http://127.0.0.1:5000/get_results?model=${this.props.data.model}&query=${this.props.data.query}&season=${this.props.data.season}&episode=${this.props.data.episode}`).then(results => {
             return results.json();
         }).then(data => {
             this.setState({top_ten: data});
-        })
+        });
     }
-
 
     render() {
         return(
